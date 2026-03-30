@@ -1,0 +1,141 @@
+/* WhatsApp Float Button - Attractive Attention Effect */
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 10000;
+}
+
+.whatsapp-float a {
+  width: 65px;
+  height: 65px;
+  background: linear-gradient(135deg, #25d366, #128C7E);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  animation: gradientPulse 2s ease-in-out infinite, gentleAttention 1.8s ease-in-out infinite;
+  background-size: 200% 200%;
+  position: relative;
+}
+
+/* إضافة دائرة خارجية متحركة لجذب الانتباه */
+.whatsapp-float a::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border: 2px solid rgba(37, 211, 102, 0.6);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  animation: ringWave 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+  pointer-events: none;
+}
+
+/* دائرة ثانية لتأثير أقوى */
+.whatsapp-float a::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border: 2px solid rgba(37, 211, 102, 0.4);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  animation: ringWave 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite 0.5s;
+  pointer-events: none;
+}
+
+.whatsapp-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.whatsapp-float a:hover {
+  transform: scale(1.1);
+  animation: none;
+  background: linear-gradient(135deg, #128C7E, #075E54);
+}
+
+.whatsapp-float a:hover::before,
+.whatsapp-float a:hover::after {
+  animation: none;
+}
+
+.whatsapp-float a:hover .whatsapp-icon {
+  transform: rotate(360deg) scale(1.1);
+  transition: transform 0.5s ease;
+}
+
+/* تأثير التدرج اللوني */
+@keyframes gradientPulse {
+  0%, 100% {
+    background-position: 0% 50%;
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+  }
+  50% {
+    background-position: 100% 50%;
+    box-shadow: 0 12px 30px rgba(37, 211, 102, 0.5);
+  }
+}
+
+/* تأثير الحلقات المتوسعة لجذب الانتباه */
+@keyframes ringWave {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0.8;
+    border-width: 2px;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.4);
+    opacity: 0;
+    border-width: 1px;
+  }
+}
+
+/* تأثير اهتزاز خفيف جداً للزر */
+@keyframes gentleAttention {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-3px) rotate(-2deg);
+  }
+  75% {
+    transform: translateY(3px) rotate(2deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .whatsapp-float {
+    bottom: 16px;
+    left: 16px;
+  }
+  .whatsapp-float a {
+    width: 58px;
+    height: 58px;
+  }
+  .whatsapp-icon {
+    width: 34px;
+    height: 34px;
+  }
+  
+  @keyframes ringWave {
+    100% {
+      transform: translate(-50%, -50%) scale(1.3);
+    }
+  }
+}

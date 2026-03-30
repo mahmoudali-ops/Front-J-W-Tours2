@@ -1,0 +1,381 @@
+/* Admin Top Navigation - Refined Theme */
+.admin-topnav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #1a2634 0%, #0f1a24 100%);
+  padding: 0.9rem 2.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 193, 7, 0.15);
+}
+
+/* Left Section */
+.topnav-left {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.topnav-left .logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 2px solid rgba(255, 193, 7, 0.6);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.topnav-left .logo:hover {
+  transform: scale(1.05);
+  border-color: #ffc107;
+}
+
+.topnav-left .brand {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0;
+  background: linear-gradient(135deg, #ffffff, #ffd966);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.3px;
+}
+
+/* Center Navigation */
+.topnav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-item a {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.7rem 1.4rem;
+  color: #e9ecef;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  border-radius: 10px;
+  transition: all 0.25s ease;
+  background: transparent;
+  position: relative;
+}
+
+.nav-item a i {
+  font-size: 1.1rem;
+  transition: all 0.25s ease;
+  opacity: 0.85;
+}
+
+.nav-item a:hover {
+  background: rgba(255, 193, 7, 0.12);
+  color: #ffc107;
+  transform: translateY(-1px);
+}
+
+.nav-item a:hover i {
+  opacity: 1;
+  transform: scale(1.05);
+  color: #ffc107;
+}
+
+/* Active Link */
+.active-link {
+  background: linear-gradient(135deg, rgba(255, 193, 7, 0.2), rgba(255, 179, 0, 0.15));
+  color: #ffc107 !important;
+  border: 1px solid rgba(255, 193, 7, 0.3);
+  box-shadow: 0 2px 8px rgba(255, 193, 7, 0.1);
+}
+
+.active-link i {
+  color: #ffc107 !important;
+  opacity: 1;
+}
+
+/* Dropdown Styles */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  cursor: pointer;
+}
+
+.dropdown-toggle .fa-chevron-down {
+  font-size: 0.8rem;
+  transition: transform 0.25s ease;
+  opacity: 0.7;
+}
+
+.dropdown:hover .dropdown-toggle .fa-chevron-down {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  background: #1e2a36;
+  border-radius: 12px;
+  padding: 0.7rem 0;
+  min-width: 220px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: all 0.25s ease;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+  list-style: none;
+  margin: 0;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 193, 7, 0.2);
+}
+
+.dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu li {
+  list-style: none;
+}
+
+.dropdown-menu li a {
+  padding: 0.7rem 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  color: #e9ecef;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.dropdown-menu li a i {
+  font-size: 1rem;
+  width: 22px;
+  opacity: 0.8;
+}
+
+.dropdown-menu li a:hover {
+  background: rgba(255, 193, 7, 0.12);
+  color: #ffc107;
+  padding-left: 2rem;
+}
+
+.dropdown-menu li a:hover i {
+  opacity: 1;
+  color: #ffc107;
+}
+
+/* Right Section */
+.topnav-right {
+  display: flex;
+  align-items: center;
+}
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: rgba(220, 53, 69, 0.85);
+  border: none;
+  padding: 0.65rem 1.5rem;
+  border-radius: 40px;
+  color: white;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logout-btn:hover {
+  background: #dc3545;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.35);
+}
+
+.logout-btn:active {
+  transform: translateY(0);
+}
+
+.logout-btn i {
+  font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .admin-topnav {
+    padding: 0.8rem 1.5rem;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+  }
+
+  .topnav-links {
+    order: 3;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    gap: 0.3rem;
+  }
+
+  .nav-item a {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .topnav-left .brand {
+    font-size: 1.2rem;
+  }
+
+  .topnav-left .logo {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+  }
+
+  .nav-item a span {
+    display: none;
+  }
+
+  .nav-item a i {
+    font-size: 1.2rem;
+    margin: 0;
+  }
+
+  .nav-item a {
+    padding: 0.7rem;
+  }
+
+  .dropdown-menu {
+    min-width: 190px;
+  }
+  
+  .dropdown-menu li a span {
+    display: inline;
+  }
+
+  .logout-btn span {
+    display: none;
+  }
+
+  .logout-btn {
+    padding: 0.7rem;
+  }
+
+  .logout-btn i {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-topnav {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.8rem 1rem;
+  }
+
+  .topnav-left {
+    justify-content: space-between;
+  }
+
+  .topnav-right {
+    justify-content: flex-end;
+  }
+
+  .topnav-links {
+    justify-content: space-between;
+    gap: 0.2rem;
+  }
+  
+  .dropdown-menu {
+    position: fixed;
+    top: auto;
+    left: 1rem;
+    right: 1rem;
+    width: auto;
+  }
+}/* Base button style */
+.Btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  background-color: rgb(255, 65, 65);
+  color: white;
+  font-weight: 600;
+}
+
+/* Icon */
+.sign {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.sign i {
+  font-size: 18px;
+}
+
+/* Text */
+.text {
+  position: absolute;
+  right: 0%;
+  width: 0%;
+  opacity: 0;
+  font-size: 1em;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+/* Hover effect */
+.Btn:hover {
+  width: 125px;
+  border-radius: 40px;
+}
+
+.Btn:hover .sign {
+  width: 30%;
+  padding-left: 10px;
+}
+
+.Btn:hover .text {
+  width: 70%;
+  opacity: 1;
+  padding-right: 10px;
+}
+
+/* Click effect */
+.Btn:active {
+  transform: translate(2px, 2px);
+}

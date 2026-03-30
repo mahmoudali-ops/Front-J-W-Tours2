@@ -1,0 +1,477 @@
+<div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" >
+    <!-- Indicators -->
+  
+    <section class="hero-section">
+
+      <!-- الفيديو -->
+      <video 
+        #heroVideo
+        class="hero-video" 
+        autoplay 
+        muted 
+        loop 
+        playsinline
+        webkit-playsinline
+        
+        preload="auto"
+        poster="assets/images/imageposter1.png"
+        [class.video-hidden]="videoFallback"
+      >
+        <source src="assets/images/poster1.mp4" type="video/mp4">
+          <!-- <sour ce src="assets/videos/videoss.webm" type="video/webm"> -->
+      </video>
+
+      @if (videoFallback) {
+        <div class="hero-fallback"></div>
+      }
+    
+      <!-- طبقة غامقة بسيطة لتحسين وضوح النص -->
+      <div class="overlay"></div>
+    
+      <!-- محتوى الهيرو -->
+      <div class="hero-content">
+        <h1 class="brand-name">J&W Tour</h1>
+<p class="brand-subtitle" #subtitleText>{{ 'HeroDiscription' | t }} <i class="fa-regular fa-heart"></i></p>
+      </div>
+  
+    
+    </section>
+    
+    
+  
+   
+  <!-- الأقسا م الجديدة تحت الـ Carousel -->
+  <section class="about-modern">
+    <div class="container">
+      <div class="about-wrapper">
+  
+        <!-- Image -->
+        <div class="about-image">
+          <img src="assets/images/about.jpg" alt="About Us">
+          <div class="image-overlay"></div>
+        </div>
+  
+        <!-- Content -->
+        <div class="about-content">
+          <span class="about-tag">{{ 'AboutUsTag' | t }}</span>
+          <h2>{{ 'AboutUsTitle' | t }}</h2>
+          <p>
+            {{ 'AboutUsDescription' | t }}
+          </p>
+        
+          <div class="about-features">
+            <div class="feature">
+              <i class="fas fa-globe"></i>
+              <span>{{ 'FeatureWorldwideTours' | t }}</span>
+            </div>
+            <div class="feature">
+              <i class="fas fa-star"></i>
+              <span>{{ 'FeatureBestServices' | t }}</span>
+            </div>
+            <div class="feature">
+              <i class="fas fa-headset"></i>
+              <span>{{ 'FeatureSupport' | t }}</span>
+            </div>
+          </div>
+        
+          <a href="#" class="about-btn">{{ 'AboutUsButton' | t }}</a>
+        </div>
+  
+      </div>
+    </div>
+  </section>
+  
+
+
+<!-- قسم الوجهات الشهيرة مع Swiper -->
+<section class="destinations-section py-5">
+  <div class="container">
+
+    <div class="text-center mb-5">
+      <h2 class="section-title">{{ 'PopularDestinationsTitle' | t }}</h2>
+      <p class="section-subtitle">
+        {{ 'PopularDestinationsSubtitle' | t }}
+      </p>
+    </div>
+
+    <!-- Swiper -->
+    <swiper-container
+      #swiper
+      class="cards-swiper"
+      effect="cards"
+      grab-cursor="true"
+      loop="true"
+      speed="1200" 
+      autoplay-delay="3000"
+      autoplay-disable-on-interaction="false"
+      touch-ratio="1.2"
+
+      cards-effect-rotate="0"
+      cards-effect-per-slide-offset="18" 
+      cards-effect-slide-shadows="false"
+
+      breakpoints='{
+        "0": { "width": 280, "height": 380 },
+        "576": { "width": 380, "height": 430 },
+        "768": { "width": 460, "height": 500 },
+        "992": { "width": 520, "height": 520 }
+      }'
+    >
+
+      @for (category of AllPopularHurghadaCat(); track category.id ) {
+        @if(isBrowser){
+          <swiper-slide>
+            <a [routerLink]="['/categrytourDetail', category.slug]" class="card-slide">
+              <img
+                [src]="category.imageCover"
+                [alt]="category.titles"
+                loading="lazy"
+              />
+              <div class="content">
+                <h3>{{category.titles}}</h3>
+                <div class="location">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span>Hurghada</span>
+                </div>
+              </div>
+            </a>
+          </swiper-slide>
+        }
+      }
+
+    </swiper-container>
+  </div>
+</section>
+
+<style>
+.destinations-section {
+  background: linear-gradient(135deg, #f5f7fa, #e4e8f0);
+  padding: 60px 20px;
+}
+
+/* Titles */
+.section-title { font-size: 2.4rem; font-weight: 800; color: #2c3e50; }
+.section-subtitle { color: #777; }
+
+/* Swiper Container */
+.cards-swiper {
+  width: 100%;
+  max-width: 520px;
+  height: 520px;
+  margin: auto;
+}
+
+/* Slides */
+swiper-slide {
+  border-radius: 20px;
+  overflow: hidden;
+  transform: translateZ(0);
+  transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 1.2s ease;
+}
+
+/* Active Card */
+swiper-slide.swiper-slide-active {
+  transform: scale(1) translateZ(0);
+  z-index: 5;
+}
+
+/* Cards behind */
+swiper-slide:not(.swiper-slide-active) {
+  transform: scale(0.94) translateZ(0);
+  opacity: 0.85;
+}
+
+/* Card */
+.card-slide {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  text-decoration: none;
+  color: white;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+  transition: transform 0.8s ease;
+  backface-visibility: hidden; /* 👈 Smooth GPU rendering */
+}
+
+/* Image */
+.card-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+/* Hover effect */
+.card-slide:hover img {
+  transform: scale(1.12);
+}
+
+/* Content */
+.content {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 2;
+  text-shadow: 0 3px 10px rgba(0,0,0,0.7);
+}
+
+.content h3 { font-size: 1.7rem; font-weight: 700; }
+.location { display: flex; align-items: center; gap: 6px; font-size: 1rem; }
+.location i { color: #2ecc71; }
+
+/* Mobile adjustments */
+@media (max-width: 576px) {
+  .cards-swiper { max-width: 95%; height: 400px; }
+  .content h3 { font-size: 1.4rem; }
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-element-bundle.min.js"></script>
+<script>
+  const swiperEl = document.querySelector('swiper-container');
+
+  Object.assign(swiperEl, {
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+    loop: true,
+    speed: 1200,
+    grabCursor: true,
+    touchRatio: 1.2
+  });
+
+  swiperEl.initialize();
+</script>
+
+  <!-- قسم الوجهات الشهيرة -->
+  <section class="destinations-section-new py-5">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="destinations-title">{{ 'HurghadaToursTitle' | t }}</h2>
+        <p class="destinations-subtitle">{{ 'HurghadaToursSubtitle' | t }}</p>
+        
+      </div>
+  
+      <div class="row">
+        @for (tour of AllPopularToursList().slice(0,8); track tour.id){
+          <div class="col-12 col-sm-6 col-lg-3 mb-4">
+            <a [routerLink]="['/tourDetail', tour.slug]" class="destination-card-new">
+              <div class="destination-image-new">
+                <img [src]="tour.imageCover" [alt]="tour.titles" class="img-fluid">
+                <div class="destination-overlay-new">
+                  <h4>{{tour.titles}}</h4>
+                  <p>{{tour.descriptions.slice(0,50)}}...</p>
+                </div>
+              </div>
+            </a>
+          </div>
+        }
+      </div>
+
+    </div>
+  </section>
+  
+
+  <section class="abu-trip-section-pro">
+
+     <!-- TOP TITLE -->
+    <div class="abu-header text-center">
+      <h2 class="abu-main-title">
+        {{ 'FeaturedExperienceTitle' | t }}
+      </h2>
+      <p class="abu-subtitle">
+        {{ 'FeaturedExperienceSubtitle' | t }}
+      </p>
+    </div>
+  
+    <div class="container">
+      <div class="row align-items-center">
+  
+        <!-- LEFT -->
+        <div class="col-lg-6 abu-trip-content">
+  
+          <h3 class="abu-title">
+            {{ 'TripTitle' | t }}
+          </h3>
+  
+          <p class="abu-location">
+            <i class="fas fa-map-marker-alt"></i>
+            {{ 'TripLocation' | t }}
+          </p>
+  
+          <div class="abu-description-container">
+            <!-- HEADER -->
+            <div class="abu-desc-header">
+              <i class="fas fa-info-circle"></i>
+              <h4>{{ 'TripDescriptionHeader' | t }}</h4>
+            </div>
+  
+            <!-- TEXT -->
+            <p class="abu-desc-text" [class.expanded]="isExpanded">
+              {{ 'TripDescription' | t }}
+            </p>
+  
+            <!-- BUTTON -->
+            <button class="abu-readmore-btn" (click)="toggleDescription()">
+              {{ isExpanded ? ('ShowLess' | t) : ('ReadMore' | t) }}
+            </button>
+          </div>
+  
+          <div class="abu-card">
+            <h5><i class="fas fa-star"></i> {{ 'HighlightsTitle' | t }}</h5>
+            <ul>
+              <li><i class="fas fa-check"></i> {{ 'HighlightsList1' | t }}</li>
+              <li><i class="fas fa-fish"></i> {{ 'HighlightsList2' | t }}</li>
+              <li><i class="fas fa-umbrella-beach"></i> {{ 'HighlightsList3' | t }}</li>
+              <li><i class="fas fa-camera"></i> {{ 'HighlightsList4' | t }}</li>
+            </ul>
+          </div>
+  
+          <div class="abu-card">
+            <h5><i class="fas fa-gift"></i> {{ 'IncludesTitle' | t }}</h5>
+            <ul>
+              <li><i class="fas fa-bus"></i> {{ 'IncludesList1' | t }}</li>
+              <li><i class="fas fa-user"></i> {{ 'IncludesList2' | t }}</li>
+              <li><i class="fas fa-water"></i> {{ 'IncludesList3' | t }}</li>
+              <li><i class="fas fa-utensils"></i> {{ 'IncludesList4' | t }}</li>
+            </ul>
+          </div>
+  
+          <div class="abu-info">
+            <span><i class="fas fa-clock"></i> {{ 'TripInfoTime' | t }}</span>
+            <span><i class="fas fa-user"></i> {{ 'TripInfoPriceAdult' | t }}</span>
+            <span><i class="fas fa-child"></i> {{ 'TripInfoDiscountChild' | t }}</span>
+            <span><i class="fas fa-baby"></i> {{ 'TripInfoPriceInfant' | t }}</span>
+          </div>
+  
+          <button class="abu-btn">{{ 'BookNowButton' | t }}</button>
+  
+        </div>
+  
+        <!-- RIGHT -->
+        <div class="col-lg-6">
+          <swiper-container
+            class="abuSwiperPro"
+            loop="true"
+            autoplay-delay="3500"
+            autoplay-disable-on-interaction="false"
+            speed="1200"
+            effect="fade"
+            fade-effect-cross-fade="true"
+            pagination="true"
+            navigation="true">
+  
+            <swiper-slide><img src="../../../assets/images/abo1.jpeg" /></swiper-slide>
+            <swiper-slide><img src="../../../assets/images/abo2.jpeg" /></swiper-slide>
+            <swiper-slide><img src="../../../assets/images/abo3.jpeg" /></swiper-slide>
+            <swiper-slide><img src="../../../assets/images/abo4.jpeg" /></swiper-slide>
+            <swiper-slide><img src="../../../assets/images/abo5.jpeg" /></swiper-slide>
+  
+          </swiper-container>
+        </div>
+  
+      </div>
+    </div>
+  </section>
+  
+
+  <section class="services-section py-5 bg-light">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title">{{ 'WhyChooseUsTitle'  | t }}</h2>
+        <p class="section-subtitle">{{ 'WhyChooseUsSubtitle' | t }}</p>
+      </div>
+      <div class="row">
+  
+        <div class="col-md-4 mb-4">
+          <div class="service-card text-center">
+            <div class="service-icon">
+              <i class="fas fa-monument"></i>
+            </div>
+            <h3>{{ 'Service1Title' | t }}</h3>
+            <p>{{ 'Service1Description' | t }}</p>
+            <a href="/categrytourDetail/thing-to-do-hurghada" class="service-link">
+              {{ 'Service1Link' | t }} <i class="fas fa-arrow-left"></i>
+            </a>
+          </div>
+        </div>
+  
+        <div class="col-md-4 mb-4">
+          <div class="service-card text-center">
+            <div class="service-icon">
+              <i class="fas fa-umbrella-beach"></i>
+            </div>
+            <h3>{{ 'Service2Title' | t }}</h3>
+            <p>{{ 'Service2Description' | t }}</p>
+            <a href="/categrytourDetail/thing-to-do-hurghada" class="service-link">
+              {{ 'Service2Link' | t }} <i class="fas fa-arrow-left"></i>
+            </a>
+          </div>
+        </div>
+  
+        <div class="col-md-4 mb-4">
+          <div class="service-card text-center">
+            <div class="service-icon">
+              <i class="fas fa-hiking"></i>
+            </div>
+            <h3>{{ 'Service3Title' | t }}</h3>
+            <p>{{ 'Service3Description' | t }}</p>
+            <a href="/categrytourDetail/thing-to-do-hurghada" class="service-link">
+              {{ 'Service3Link' | t }} <i class="fas fa-arrow-left"></i>
+            </a>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </section>
+  
+  <section class="experience-section py-5">
+    <div class="container">
+      <div class="row align-items-center g-5">
+  
+        <!-- Image -->
+        <div class="col-lg-6">
+          <div class="experience-image reveal-left">
+            <img src="../../../assets/images/tut2.jpg" alt="J&W Tour Experience" class="img-fluid rounded-experience">
+          </div>
+        </div>
+  
+        <!-- Content -->
+        <div class="col-lg-6">
+          <div class="experience-content reveal-right">
+            <span class="experience-badge">
+              <strong>J&W Tour</strong>
+            </span>
+  
+            <h2 class="experience-title">{{ 'TravelersSmilesTitle' | t }}</h2>
+
+            <p class="experience-desc">{{ 'TravelersSmilesDescription' | t }}</p>
+            
+            <ul class="experience-list">
+              <li><i class="fas fa-star"></i> {{ 'TravelersSmilesFeature1' | t }}</li>
+              <li><i class="fas fa-water"></i> {{ 'TravelersSmilesFeature2' | t }}</li>
+              <li><i class="fas fa-smile-beam"></i> {{ 'TravelersSmilesFeature3' | t }}</li>
+              <li><i class="fas fa-globe-americas"></i> {{ 'TravelersSmilesFeature4' | t }}</li>
+            </ul>
+            
+            <a href="/about" class="experience-btn">
+              {{ 'TravelersSmilesButton' | t }} <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </section>
+  <app-client-footer></app-client-footer>
+
+
+</div>
+  
+
+

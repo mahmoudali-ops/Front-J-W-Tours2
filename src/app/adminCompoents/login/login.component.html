@@ -1,0 +1,81 @@
+<section class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-5">
+        <div class="card shadow-lg border-0 rounded-4">
+          <div class="card-body p-5">
+  
+            <!-- Logo -->
+            <div class="text-center mb-4">
+              <img src="assets/images/jwLogo.png" alt="Logo" class="mb-3" height="60">
+              <h3 class="fw-bold">Log with your account</h3>
+            </div>
+  
+            <!-- Form -->
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  
+              <!-- Full Name -->
+             
+  
+              <!-- Email -->
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input [ngClass]="{
+                    'is-invalid': loginForm.get('email')?.invalid && (loginForm.get('email')?.touched || loginForm.get('email')?.dirty),
+                    'is-valid': loginForm.get('email')?.valid && (loginForm.get('email')?.touched || loginForm.get('email')?.dirty)
+                }" id="email" type="email" class="form-control" formControlName="email" placeholder="example@email.com">
+                @if(loginForm.get('email')?.invalid && (loginForm.get('email')?.touched||loginForm.get('email')?.dirty)){
+                <div class="text-danger small mt-1">
+                  Valid Email is required.
+                </div>
+            }
+              </div>
+  
+              <!-- Password -->
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input [ngClass]="{
+                    'is-invalid': loginForm.get('password')?.invalid && (loginForm.get('password')?.touched || loginForm.get('password')?.dirty),
+                    'is-valid': loginForm.get('password')?.valid && (loginForm.get('password')?.touched || loginForm.get('password')?.dirty)
+                }" id="password" type="password" class="form-control" formControlName="password" placeholder="••••••">
+               @if(loginForm.get('password')?.invalid && (loginForm.get('password')?.touched ||loginForm.get('password')?.dirty)){
+                <div class="text-danger small mt-1"
+                    >
+                    password must be at least 6 characters
+                    a minimum of 1 lower case letter [a-z]
+                    a minimum of 1 upper case letter [A-Z]
+                    a minimum of 1 numeric character [0-9]                </div>
+            }
+              </div>
+  
+              <!-- Confirm Password -->
+           
+  
+              <!-- Phone -->
+             
+  
+              <!-- Submit -->
+              <div class="d-flex justify-content-center gap-3 mt-4">
+                <button>
+                  <span class="shadow"></span>
+                  <span class="edge"></span>
+                  <span class="front">
+                    <i class="fa-solid fa-right-to-bracket me-2"></i> Log In
+                  </span>
+                </button>
+              </div>
+              
+
+              @if(IsSccuess==true){
+                <div class="alert alert-success text-center">
+                  Logining successful!.
+                </div>
+              }
+  
+    
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

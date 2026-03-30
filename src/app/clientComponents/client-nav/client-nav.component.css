@@ -1,0 +1,933 @@
+/* ===========================
+   NAV (restored as-is)
+   =========================== */
+.main-nav {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    padding: 18px 0;
+    transition: background-color 0.4s ease, padding 0.4s ease;
+    background: transparent;
+  }
+  
+  .main-nav.scrolled {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px 0;
+    backdrop-filter: blur(4px);
+  }
+  
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: auto;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+  .logo img {
+    height: 40px;
+    border-radius: 4px;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;       /* زيادة المسافة بين العناصر */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 19px;   /* تكبير حجم الخط */
+    font-weight: 500;   /* نص شبه عريض */
+    transition: color 0.3s, transform 0.3s;
+  }
+  
+  .nav-links a:hover {
+    color: #ffd700;    /* تغيير اللون عند hover */
+    transform: scale(1.1); /* تأثير تكبير خفيف عند المرور */
+  }
+  
+  
+  .nav-links a:hover {
+    color: #ffcc00;
+  }
+  
+  /* الشعار */
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;             /* زيادة المسافة بين الصورة والنص */
+    font-size: 1.8rem;     /* حجم النص أكبر */
+    font-weight: 700;      /* نص عريض */
+    color: #fff;           /* لون النص */
+    text-transform: uppercase; /* اختياري لتنسيق النص */
+  }
+  
+  .logo img {
+    width: 70px;           /* زيادة حجم الشعار */
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.3s; /* حركة عند hover */
+  }
+  
+  .logo:hover img {
+    transform: scale(1.1);  /* تكبير الشعار قليلًا عند hover */
+  }
+  
+  .logo span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+/* =======================
+   NAVBAR BASE
+======================= */
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 35px;
+  position: relative;
+}
+
+.nav-links li {
+  position: relative;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  transition: color .25s ease, transform .25s ease;
+}
+
+.nav-links a:hover {
+  color: #ffcc00;
+  transform: scale(1.05);
+}
+
+
+/* =======================
+   DROPDOWN MENU
+======================= */
+.nav-item.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(6px);
+  border-radius: 10px;
+  padding: 8px 0;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+
+  /* Hidden default */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: 0.3s ease;
+  z-index: 1001;
+  min-width: 220px;
+}
+
+/* Show on hover */
+.nav-item.dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Items inside dropdown */
+.dropdown-menu li {
+  width: 100%;
+}
+
+.dropdown-menu a {
+  display: block;
+  width: 100%;
+  padding: 10px 18px;
+  font-size: 17px;
+  color: #fff;
+  text-decoration: none;
+  transition: background 0.25s ease, padding-left 0.25s ease;
+}
+
+.dropdown-menu a:hover {
+  background: rgba(255, 255, 255, 0.15);
+  padding-left: 25px;
+  color: #ffd700;
+  border-radius: 6px;
+}
+.main-nav {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  padding: 18px 0;
+  transition: background-color 0.4s ease, padding 0.4s ease;
+  background: transparent;
+}
+
+/* لما ينزل المستخدم → خلفية غامقة وخط أبيض */
+.main-nav.scrolled {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px 0;
+  backdrop-filter: blur(4px);
+}
+
+/* ----------- هنا تعديل مهم ----------- */
+/* الوضع العادي (خلفية فاتحة) */
+.main-nav.light .nav-links a,
+.main-nav.light .logo,
+.main-nav.light .social-icons a {
+  color: #000 !important;
+}
+
+/* hover */
+.main-nav.light .nav-links a:hover,
+.main-nav.light .social-icons a:hover {
+  color: #444 !important;
+}
+
+/* شعار */
+.main-nav.light .logo img {
+  filter: none !important;
+}
+
+
+/**************************************************************************/
+
+/* ===== HAMBURGER BUTTON ANIMATIONS ===== */
+.hamburger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 42px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px 6px;
+  z-index: 1002;
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-left: auto;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.hamburger-btn span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #9f813c 0%, #eda808 100%);
+  border-radius: 10px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+  box-shadow: 0 2px 8px rgba(123, 97, 255, 0.3);
+}
+
+.hamburger-btn:hover {
+  background: rgba(123, 97, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(123, 97, 255, 0.2);
+}
+
+.hamburger-btn:hover span {
+  background: linear-gradient(90deg, #00D4FF 0%, #7B61FF 100%);
+  transform: scaleX(1.1);
+}
+
+.hamburger-btn.active {
+  transform: rotate(180deg);
+  background: rgba(255, 71, 87, 0.1);
+}
+
+.hamburger-btn.active span:nth-child(1) {
+  transform: rotate(45deg) translate(8px, 8px);
+  background: linear-gradient(90deg, #FF416C 0%, #FF4B2B 100%);
+  box-shadow: 0 2px 8px rgba(255, 65, 108, 0.4);
+}
+
+.hamburger-btn.active span:nth-child(2) {
+  opacity: 0;
+  transform: scale(0) translateX(-10px);
+}
+
+.hamburger-btn.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(8px, -8px);
+  background: linear-gradient(90deg, #FF416C 0%, #FF4B2B 100%);
+  box-shadow: 0 2px 8px rgba(255, 65, 108, 0.4);
+}
+
+@media (max-width: 1199px) {
+  .hamburger-btn {
+    display: flex;
+  }
+  
+  .nav-links,
+  .social-icons {
+    display: none;
+  }
+  
+  .main-nav.hide-on-mobile {
+    display: none;
+  }
+}
+
+.language-switcher {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.lang-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lang-btn img {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.lang-btn:hover {
+  transform: translateY(-2px);
+}
+
+.lang-btn:hover img {
+  transform: scale(1.15);
+  border-color: #f9d162;
+  box-shadow: 0 6px 20px rgba(249, 209, 98, 0.5);
+  filter: brightness(1.1);
+}
+
+/* Mobile responsive */
+@media (max-width: 1200px) {
+  .language-switcher {
+    gap: 4px;
+    padding: 6px 8px;
+  }
+  
+  .lang-btn img {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+}
+
+/* Base style */
+.social-icons a {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(45deg, #cab7b4, #f1e1e8);
+  background-size: 300% 300%;
+  color: #fff;
+  font-size: 20px;
+  text-decoration: none;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  animation: float 3s ease-in-out infinite,
+             gradientMove 6s ease infinite;
+}
+
+/* Different timing = natural look */
+.social-icons a:nth-child(1) { animation-delay: 0s, 0s; }
+.social-icons a:nth-child(2) { animation-delay: 0.4s, 1s; }
+.social-icons a:nth-child(3) { animation-delay: 0.8s, 2s; }
+
+/* Hover effect */
+.social-icons a:hover {
+  transform: translateY(-8px) scale(1.25);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.35);
+}
+
+/* Floating animation */
+@keyframes float {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-7px); }
+  100% { transform: translateY(0); }
+}
+
+/* Gradient animation */
+@keyframes gradientMove {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@media (max-width: 768px) {
+  .social-icons {
+    display: none;
+  }
+}
+ .social-icons a:hover {
+    color: #ffd700;
+    scale: 1.5;
+  }
+
+/* ===========================
+   DESKTOP NAV: social icons (gold glass)
+   =========================== */
+@media (min-width: 1200px) {
+  .social-icons a {
+    background: rgba(249, 209, 98, 0.14);
+    border: 1px solid rgba(249, 209, 98, 0.22);
+    color: rgba(249, 209, 98, 0.95);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.22);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    animation: none;
+    transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 220ms ease,
+      border-color 220ms ease,
+      box-shadow 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      color 220ms ease;
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+  }
+
+  .social-icons a:hover {
+    transform: translate3d(0, -6px, 0) scale(1.08);
+    background: rgba(255, 215, 0, 0.22);
+    border-color: rgba(255, 215, 0, 0.34);
+    color: #ffffff;
+    box-shadow: 0 16px 38px rgba(249, 209, 98, 0.22), 0 18px 44px rgba(0, 0, 0, 0.28);
+  }
+
+  .social-icons a:active {
+    transform: translate3d(0, -2px, 0) scale(1.02);
+  }
+}
+
+/* ===========================
+   OFFCANVAS (new only)
+   =========================== */
+:host {
+  --oc-orange-1: #ff7a45;
+  --oc-orange-2: #ff9a3d;
+  --oc-ink: #0f172a;
+  --oc-muted: rgba(15, 23, 42, 0.72);
+  --oc-shadow: 0 18px 60px rgba(2, 6, 23, 0.18);
+  --oc-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.oc-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 998;
+  opacity: 0;
+  pointer-events: none;
+  background: rgba(2, 6, 23, 0.42);
+  transition: opacity 260ms var(--oc-ease);
+  will-change: opacity;
+  touch-action: none;
+}
+
+@supports ((backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px))) {
+  .oc-overlay {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background: rgba(2, 6, 23, 0.35);
+  }
+}
+
+.oc-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.oc-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  height: 100vh;
+  height: 100dvh;
+  width: min(320px, 92vw);
+  background: #ffffff;
+  color: var(--oc-ink);
+  transform: translate3d(-102%, 0, 0);
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+  transition: transform 420ms var(--oc-ease), opacity 260ms var(--oc-ease);
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgba(2, 6, 23, 0.08);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  overflow: hidden;
+  contain: layout paint;
+  -webkit-overflow-scrolling: touch;
+}
+
+.oc-panel.is-open {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+  pointer-events: auto;
+  box-shadow: var(--oc-shadow);
+}
+
+.oc-header {
+  padding: calc(12px + env(safe-area-inset-top)) 14px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid rgba(2, 6, 23, 0.06);
+  background:
+    linear-gradient(135deg, rgba(255, 122, 69, 0.12), rgba(255, 154, 61, 0.08)),
+    #ffffff;
+}
+
+.oc-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.oc-brand img {
+  width: 68px;
+  height: auto;
+  transform: translateZ(0);
+}
+
+.oc-close {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(2, 6, 23, 0.10);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.70);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.oc-close:hover {
+  transform: rotate(6deg) translate3d(0, -1px, 0);
+  border-color: rgba(255, 122, 69, 0.20);
+  box-shadow: 0 14px 34px rgba(2, 6, 23, 0.12);
+}
+
+.oc-close:focus-visible {
+  outline: 3px solid rgba(255, 122, 69, 0.35);
+  outline-offset: 2px;
+}
+
+.oc-close-icon {
+  width: 18px;
+  height: 18px;
+  position: relative;
+}
+
+.oc-close-icon::before,
+.oc-close-icon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 18px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--oc-orange-1), var(--oc-orange-2));
+  border-radius: 999px;
+  transform-origin: center;
+  transition: transform 220ms var(--oc-ease);
+}
+
+.oc-close-icon::before {
+  transform: rotate(45deg);
+}
+
+.oc-close-icon::after {
+  transform: rotate(-45deg);
+}
+
+.oc-user {
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.oc-user-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background:
+    linear-gradient(135deg, rgba(255, 122, 69, 0.22), rgba(255, 154, 61, 0.16)),
+    rgba(2, 6, 23, 0.04);
+  border: 1px solid rgba(2, 6, 23, 0.06);
+}
+
+.oc-user-title {
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.oc-user-subtitle {
+  font-size: 13px;
+  color: var(--oc-muted);
+  margin-top: 2px;
+}
+
+.oc-divider {
+  height: 1px;
+  background: rgba(2, 6, 23, 0.07);
+  margin: 0 14px;
+}
+
+.oc-nav {
+  padding: 10px 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: auto;
+}
+
+.oc-item {
+  width: 100%;
+  text-decoration: none;
+  color: var(--oc-ink);
+  border: 1px solid rgba(2, 6, 23, 0.08);
+  border-radius: 14px;
+  padding: 12px 12px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+.oc-item-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.oc-icn {
+  width: 18px;
+  text-align: center;
+  color: var(--oc-orange-1);
+}
+
+.oc-label {
+  font-weight: 750;
+  letter-spacing: 0.15px;
+}
+
+.oc-item:hover {
+  transform: translate3d(2px, 0, 0);
+  border-color: rgba(255, 122, 69, 0.26);
+  background: rgba(255, 122, 69, 0.06);
+  box-shadow: 0 12px 30px rgba(2, 6, 23, 0.10);
+}
+
+.oc-item.is-active {
+  border-color: rgba(255, 122, 69, 0.32);
+  background: linear-gradient(135deg, rgba(255, 122, 69, 0.12), rgba(255, 154, 61, 0.08));
+}
+
+.oc-item-btn {
+  border: 1px solid rgba(2, 6, 23, 0.08);
+  appearance: none;
+  cursor: pointer;
+}
+
+.oc-chevron {
+  color: rgba(15, 23, 42, 0.55);
+  transition: transform 260ms var(--oc-ease);
+}
+
+.oc-item-btn[aria-expanded="true"] .oc-chevron {
+  transform: rotate(180deg);
+}
+
+.oc-sub {
+  margin: 0 2px 6px;
+  padding: 0 6px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translate3d(0, -6px, 0);
+  transition: max-height 340ms var(--oc-ease), opacity 220ms var(--oc-ease), transform 340ms var(--oc-ease);
+}
+
+.oc-sub.is-open {
+  max-height: 640px;
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.oc-sub-item {
+  display: block;
+  padding: 10px 12px;
+  margin: 6px 4px 0;
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--oc-ink);
+  border: 1px solid rgba(2, 6, 23, 0.06);
+  background: rgba(2, 6, 23, 0.02);
+  transition: transform 160ms ease, background-color 160ms ease, border-color 160ms ease;
+  transform: translate3d(0, 0, 0);
+}
+
+.oc-sub-item:hover {
+  transform: translate3d(2px, 0, 0);
+  background: rgba(255, 122, 69, 0.08);
+  border-color: rgba(255, 122, 69, 0.18);
+}
+
+.oc-social {
+  padding: 12px 14px calc(12px + env(safe-area-inset-bottom));
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.oc-social-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  border: 1px solid rgba(2, 6, 23, 0.08);
+  background: rgba(2, 6, 23, 0.03);
+  color: var(--oc-ink);
+  display: grid;
+  place-items: center;
+  text-decoration: none;
+  transition: transform 160ms ease, background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+  transform: translateZ(0);
+}
+
+.oc-social-btn:hover {
+  transform: translate3d(0, -1px, 0);
+  background: rgba(255, 122, 69, 0.10);
+  border-color: rgba(255, 122, 69, 0.18);
+  box-shadow: 0 14px 34px rgba(2, 6, 23, 0.12);
+}
+
+/* Full-width on mobile like before */
+@media (max-width: 768px) {
+  .oc-panel {
+    width: 100vw;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .oc-overlay,
+  .oc-panel,
+  .oc-item,
+  .oc-sub {
+    transition: none !important;
+  }
+}
+
+/* ===========================
+   OFFCANVAS: premium open/close motion
+   =========================== */
+.oc-panel {
+  transform: translate3d(-104%, 0, 0);
+  opacity: 0;
+}
+
+.oc-panel.is-open {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+}
+
+/* subtle gradient accent sweep */
+.oc-panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 10px;
+  background: linear-gradient(180deg, var(--oc-orange-1), var(--oc-orange-2));
+  opacity: 0;
+  transform: translate3d(-10px, 0, 0);
+  transition: opacity 260ms var(--oc-ease), transform 420ms var(--oc-ease);
+  will-change: transform, opacity;
+}
+
+.oc-panel.is-open::before {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* stagger reveal (transform/opacity only) */
+.oc-nav > * {
+  opacity: 0;
+  transform: translate3d(-10px, 0, 0);
+  transition: opacity 260ms var(--oc-ease), transform 420ms var(--oc-ease);
+  will-change: transform, opacity;
+}
+
+.oc-panel.is-open .oc-nav > * {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.oc-panel.is-open .oc-nav > *:nth-child(1) { transition-delay: 40ms; }
+.oc-panel.is-open .oc-nav > *:nth-child(2) { transition-delay: 70ms; }
+.oc-panel.is-open .oc-nav > *:nth-child(3) { transition-delay: 100ms; }
+.oc-panel.is-open .oc-nav > *:nth-child(4) { transition-delay: 130ms; }
+.oc-panel.is-open .oc-nav > *:nth-child(5) { transition-delay: 160ms; }
+.oc-panel.is-open .oc-nav > *:nth-child(6) { transition-delay: 190ms; }
+.oc-panel.is-open .oc-nav > *:nth-child(7) { transition-delay: 220ms; }
+.oc-panel.is-open .oc-nav > *:nth-child(8) { transition-delay: 250ms; }
+.oc-panel.is-open .oc-nav > *:nth-child(9) { transition-delay: 280ms; }
+.oc-panel.is-open .oc-nav > *:nth-child(10) { transition-delay: 310ms; }
+
+/* Force full-width offcanvas on mobile (override later width rules) */
+@media (max-width: 768px) {
+  .oc-panel {
+    width: 100vw !important;
+    max-width: 100vw !important;
+  }
+}
+
+/* ===========================
+   DESKTOP NAV: gold hover + underline
+   (override without changing layout)
+   =========================== */
+.nav-links a,
+.nav-links .nav-link {
+  position: relative;
+}
+
+.nav-links a::after,
+.nav-links .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: -8px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #f9d162 0%, #ffd700 50%, #f9d162 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 0.95;
+}
+
+.nav-links a:hover::after,
+.nav-links .nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Hurghada parent hover = gold (open dropdown) */
+.nav-item.dropdown:hover > a,
+.nav-item.dropdown:hover > .nav-link {
+  color: #ffd700 !important;
+}
+
+/* Before scroll (light mode): make desktop nav text gold */
+.main-nav.light .nav-links a,
+.main-nav.light .nav-links .nav-link {
+  color: #f9d162 !important;
+}
+
+.main-nav.light .nav-links a:hover,
+.main-nav.light .nav-links .nav-link:hover {
+  color: #ffd700 !important;
+}
+.main-nav.light .nav-links a:hover,
+.main-nav.light .nav-links .nav-link:hover {
+  color: #ffd700 !important;
+}
+
+/* ===========================
+   OFFCANVAS: larger + gold typography
+   =========================== */
+.oc-panel {
+  width: min(340px, 92vw);
+}
+
+.oc-item,
+.oc-item.oc-item-btn {
+  padding: 14px 14px;
+}
+
+.oc-label {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--oc-ink);
+  letter-spacing: 0.2px;
+}
+
+.oc-icn,
+.oc-chevron {
+  color: #f9d162 !important;
+}
+
+.oc-sub-item {
+  font-size: 16px;
+  font-weight: 750;
+  color: var(--oc-ink);
+  background: rgba(2, 6, 23, 0.04);
+}
+
+.oc-sub-item:hover {
+  background: rgba(255, 122, 69, 0.10);
+}
+
+.oc-user-title,
+.oc-user-subtitle {
+  color: var(--oc-ink);
+}

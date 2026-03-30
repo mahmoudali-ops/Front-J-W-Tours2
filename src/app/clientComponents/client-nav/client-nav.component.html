@@ -1,0 +1,197 @@
+<nav class="main-nav" 
+[class.scrolled]="isScrolled" 
+[class.light]="!isScrolled"
+[class.hide-on-mobile]="isOffcanvasOpen">
+    <div class="container nav-container">
+      <!-- الشعار -->
+      <a class="logo" routerLink="/">
+        <img src="assets/images/jwLogo.png" alt="Logo" />
+      </a>
+  
+      <!-- القائمة في الوسط -->
+      <ul class="nav-links">
+        <li><a routerLink="/"routerLinkActive="active-link">{{ 'NAV.HOME' | t }}</a></li>
+        <!-- <li><a routerLink="tour"routerLinkActive="active-link">Tours</a></li> -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle">  {{ 'NAV.HURGHADA_TOURS' | t }}</a>
+        
+          <ul class="dropdown-menu">
+            <li><a [routerLink]="['/categrytourDetail', 'cairo-tours-hurghada']">{{ 'NAV.CAIRO_TOURS' | t }}</a></li>
+            <li><a [routerLink]="['/categrytourDetail', 'luxor-tours-hurghada']"> {{ 'NAV.LUXOR_TOURS' | t }}</a></li>
+            <li><a [routerLink]="['/categrytourDetail', 'safari-tours-hurghada']">{{ 'NAV.SAFARI_TOURS' | t }}</a></li>
+            <li><a [routerLink]="['/categrytourDetail', 'sea-tours-hurghada']">{{ 'NAV.SEA_TOURS' | t }}</a></li>
+            <li><a [routerLink]="['/categrytourDetail', 'diving-tours-hurgada']">Diving</a></li>
+            <li><a [routerLink]="['/categrytourDetail', 'thing-to-do-hurghada']"> {{ 'NAV.THINGS_TO_DO_HURGHADA' | t }}</a></li>
+          </ul>
+        </li>
+
+   
+        <li><a routerLink="transfer"routerLinkActive="active-link"> {{ 'NAV.TRANSFERS' | t }}</a></li>
+        <li><a routerLink="/blogs"routerLinkActive="active-link">{{ 'NAV.BLOGS' | t }}</a></li>
+        <li><a routerLink="/reviews"routerLinkActive="active-link">{{ 'NAV.REVIEWS' | t }}</a></li>
+        <li><a routerLink="/about"routerLinkActive="active-link">{{ 'NAV.ABOUT' | t }}</a></li>
+      </ul>
+      <div class="language-switcher">
+        <!-- <button class="lang-btn">
+          <img src="../../../assets/images/french2.jpg" alt="holand"(click)="changeLang('fr')">
+         </button> -->
+        <button class="lang-btn">
+          <img src="../../../assets/images/holand.png" alt="holand"(click)="changeLang('nl')">
+         </button>
+        <button class="lang-btn">
+          <img src="../../../assets/images/roman.png" alt="roman"(click)="changeLang('ro')">
+        </button>
+        <button class="lang-btn">
+          <img src="assets/images/german.jpg" alt="German"(click)="changeLang('de')">
+        </button>
+        <button class="lang-btn">
+          <img src="assets/images/brith.png" alt="English"(click)="changeLang('en')">
+        </button>
+      </div>
+      
+      <!-- Social Icons على اليمين s-->
+      <div class="social-icons">
+        <a href="https://www.facebook.com/share/1GH5uKg1dV/" class="social-icon" data-name="facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+   
+        <a href="https://www.tiktok.com/@jwtouregypt?_r=1&_t=ZN-956AF95sacI"><i class="fab fa-tiktok"></i></a>
+
+        <a href="https://www.instagram.com/jwtouregypt?igsh=aW90c3FucW5keTll" class="social-icon" data-name="instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+      <button class="hamburger-btn" (click)="toggleOffcanvas()" [class.active]="isOffcanvasOpen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    
+    </div>
+  </nav>
+
+  <div
+    class="oc-overlay"
+    [class.is-open]="isOffcanvasOpen"
+    (click)="closeOffcanvas()"
+    aria-hidden="true">
+  </div>
+
+  <aside
+    #offcanvasPanel
+    class="oc-panel"
+    [class.is-open]="isOffcanvasOpen"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-hidden]="!isOffcanvasOpen"
+    aria-label="Menu">
+    <div class="oc-header">
+      <a class="oc-brand" routerLink="/" (click)="closeOffcanvas()">
+        <img src="../../../assets/images/jwLogo.png" alt="J&W Tours" />
+      </a>
+
+      <button
+        #offcanvasCloseBtn
+        type="button"
+        class="oc-close"
+        (click)="closeOffcanvas()"
+        [attr.aria-label]="'Close menu'">
+        <span class="oc-close-icon" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    <div class="oc-user">
+      <div class="oc-user-avatar" aria-hidden="true"></div>
+      <div class="oc-user-meta">
+        <div class="oc-user-title">Guest</div>
+        <div class="oc-user-subtitle">Welcome back</div>
+      </div>
+    </div>
+
+    <div class="oc-divider" role="separator" aria-hidden="true"></div>
+
+    <nav class="oc-nav" aria-label="Primary">
+      <a class="oc-item" routerLink="/" routerLinkActive="is-active" (click)="closeOffcanvas()">
+        <span class="oc-item-left">
+          <i class="fa-solid fa-house oc-icn" aria-hidden="true"></i>
+          <span class="oc-label">{{ 'NAV.HOME' | t }}</span>
+        </span>
+      </a>
+
+      <button
+        type="button"
+        class="oc-item oc-item-btn"
+        (click)="toggleDropdown($event, 'hurghada')"
+        [attr.aria-expanded]="activeDropdown === 'hurghada'">
+        <span class="oc-item-left">
+          <i class="fa-solid fa-map-location-dot oc-icn" aria-hidden="true"></i>
+          <span class="oc-label">{{ 'NAV.HURGHADA_TOURS' | t }}</span>
+        </span>
+        <i class="fa-solid fa-chevron-down oc-chevron" aria-hidden="true"></i>
+      </button>
+
+      <div class="oc-sub" [class.is-open]="activeDropdown === 'hurghada'">
+        <a class="oc-sub-item" [routerLink]="['/categrytourDetail', 'cairo-tours-hurghada']" (click)="closeOffcanvas()">
+          {{ 'NAV.CAIRO_TOURS' | t }}
+        </a>
+        <a class="oc-sub-item" [routerLink]="['/categrytourDetail', 'luxor-tours-hurghada']" (click)="closeOffcanvas()">
+          {{ 'NAV.LUXOR_TOURS' | t }}
+        </a>
+        <a class="oc-sub-item" [routerLink]="['/categrytourDetail', 'safari-tours-hurghada']" (click)="closeOffcanvas()">
+          {{ 'NAV.SAFARI_TOURS' | t }}
+        </a>
+        <a class="oc-sub-item" [routerLink]="['/categrytourDetail', 'sea-tours-hurghada']" (click)="closeOffcanvas()">
+          {{ 'NAV.SEA_TOURS' | t }}
+        </a>
+        <a class="oc-sub-item" [routerLink]="['/categrytourDetail', 'diving-tours-hurgada']" (click)="closeOffcanvas()">
+          Diving
+        </a>
+        <a class="oc-sub-item" [routerLink]="['/categrytourDetail', 'thing-to-do-hurghada']" (click)="closeOffcanvas()">
+          {{ 'NAV.THINGS_TO_DO_HURGHADA' | t }}
+        </a>
+      </div>
+
+      <a class="oc-item" routerLink="transfer" routerLinkActive="is-active" (click)="closeOffcanvas()">
+        <span class="oc-item-left">
+          <i class="fa-solid fa-van-shuttle oc-icn" aria-hidden="true"></i>
+          <span class="oc-label">{{ 'NAV.TRANSFERS' | t }}</span>
+        </span>
+      </a>
+
+      <a class="oc-item" routerLink="/blogs" routerLinkActive="is-active" (click)="closeOffcanvas()">
+        <span class="oc-item-left">
+          <i class="fa-regular fa-newspaper oc-icn" aria-hidden="true"></i>
+          <span class="oc-label">{{ 'NAV.BLOGS' | t }}</span>
+        </span>
+      </a>
+
+      <a class="oc-item" routerLink="/reviews" routerLinkActive="is-active" (click)="closeOffcanvas()">
+        <span class="oc-item-left">
+          <i class="fa-regular fa-star oc-icn" aria-hidden="true"></i>
+          <span class="oc-label">{{ 'NAV.REVIEWS' | t }}</span>
+        </span>
+      </a>
+
+      <a class="oc-item" routerLink="/about" routerLinkActive="is-active" (click)="closeOffcanvas()">
+        <span class="oc-item-left">
+          <i class="fa-regular fa-circle-question oc-icn" aria-hidden="true"></i>
+          <span class="oc-label">{{ 'NAV.ABOUT' | t }}</span>
+        </span>
+      </a>
+    </nav>
+
+    <div class="oc-divider" role="separator" aria-hidden="true"></div>
+
+    <div class="oc-social" aria-label="Social">
+      <a href="https://www.facebook.com/share/1GH5uKg1dV/" class="oc-social-btn" aria-label="Facebook">
+        <i class="fab fa-facebook-f" aria-hidden="true"></i>
+      </a>
+      <a href="https://www.tiktok.com/@jwtouregypt?_r=1&_t=ZN-956AF95sacI" class="oc-social-btn" aria-label="TikTok">
+        <i class="fab fa-tiktok" aria-hidden="true"></i>
+      </a>
+      <a href="https://www.instagram.com/jwtouregypt?igsh=aW90c3FucW5keTll" class="oc-social-btn" aria-label="Instagram">
+        <i class="fab fa-instagram" aria-hidden="true"></i>
+      </a>
+    </div>
+  </aside>
+
