@@ -3,14 +3,17 @@ import {
   Component,
   ElementRef,
   HostListener,
+  Inject,
   OnDestroy,
   OnInit,
+  PLATFORM_ID,
   ViewChild
 } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { LanguageService } from '../../core/services/language.service';
 import { TranslatedPipe } from '../../core/pipes/translate.pipe';
 import { TranslationService } from '../../core/services/translation.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-client-nav',
@@ -20,7 +23,8 @@ import { TranslationService } from '../../core/services/translation.service';
   styleUrl: './client-nav.component.css'
 })
 export class ClientNavComponent implements OnInit {
-  isBrowser = typeof window !== 'undefined';
+
+  isBrowser: boolean;
 
   isScrolled = false;
   isOffcanvasOpen = false;
@@ -33,15 +37,22 @@ export class ClientNavComponent implements OnInit {
   private scrollY = 0;
 
   constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
     private langService: LanguageService,
     private translationService: TranslationService
-  ) {}
-
-  ngOnInit(): void {
-    this.onWindowScroll();
+  ) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
+  ngOnInit(): void {
+    if (this.isBrowser) {
+      this.onWindowScroll();
+    }
+  }
+
+  // =========================
   // Scroll
+  // =========================
   @HostListener('window:scroll')
   onWindowScroll(): void {
     if (!this.isBrowser) return;
@@ -52,9 +63,13 @@ export class ClientNavComponent implements OnInit {
     this.isScrolled = scrollPosition > 50;
   }
 
-  // Toggle Offcanvas
+  // =========================
+  // Offcanvas
+  // =========================
   toggleOffcanvas(): void {
     this.isOffcanvasOpen = !this.isOffcanvasOpen;
+
+    if (!this.isBrowser) return;
 
     if (this.isOffcanvasOpen) {
       this.openOffcanvasSideEffects();
@@ -66,6 +81,9 @@ export class ClientNavComponent implements OnInit {
 
   closeOffcanvas(): void {
     this.isOffcanvasOpen = false;
+
+    if (!this.isBrowser) return;
+
     this.closeOffcanvasSideEffects();
     this.activeDropdown = null;
   }
@@ -76,7 +94,6 @@ export class ClientNavComponent implements OnInit {
     this.lastActiveEl = document.activeElement as HTMLElement | null;
     this.scrollY = window.scrollY || document.documentElement.scrollTop || 0;
 
-    // iOS-friendly scroll lock (avoid layout thrash / freezing)
     document.body.style.position = 'fixed';
     document.body.style.top = `-${this.scrollY}px`;
     document.body.style.left = '0';
@@ -106,7 +123,9 @@ export class ClientNavComponent implements OnInit {
     this.lastActiveEl = null;
   }
 
+  // =========================
   // Dropdown
+  // =========================
   toggleDropdown(event: Event, dropdownName: string): void {
     event.preventDefault();
     event.stopPropagation();
@@ -115,9 +134,13 @@ export class ClientNavComponent implements OnInit {
       this.activeDropdown === dropdownName ? null : dropdownName;
   }
 
-  // ESC
+  // =========================
+  // Keyboard Events
+  // =========================
   @HostListener('document:keydown.escape')
   onEscapeKey(): void {
+    if (!this.isBrowser) return;
+
     if (this.isOffcanvasOpen) {
       this.closeOffcanvas();
     }
@@ -125,6 +148,7 @@ export class ClientNavComponent implements OnInit {
 
   @HostListener('document:keydown', ['$event'])
   onKeydown(event: KeyboardEvent): void {
+    if (!this.isBrowser) return;
     if (!this.isOffcanvasOpen) return;
     if (event.key !== 'Tab') return;
 
@@ -135,7 +159,12 @@ export class ClientNavComponent implements OnInit {
       root.querySelectorAll<HTMLElement>(
         'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
       )
-    ).filter((el) => !el.hasAttribute('disabled') && el.tabIndex !== -1 && el.offsetParent !== null);
+    ).filter(
+      (el) =>
+        !el.hasAttribute('disabled') &&
+        el.tabIndex !== -1 &&
+        el.offsetParent !== null
+    );
 
     if (focusables.length === 0) {
       event.preventDefault();
@@ -159,8 +188,10 @@ export class ClientNavComponent implements OnInit {
     }
   }
 
+  // =========================
   // Language
-  changeLang(lang: 'en' | 'de' | 'nl'|'ro'|'fr'): void {
+  // =========================
+  changeLang(lang: 'en' | 'de' | 'nl' | 'ro' | 'fr'): void {
     this.langService.setLanguage(lang);
     this.translationService.setLang(lang);
   }

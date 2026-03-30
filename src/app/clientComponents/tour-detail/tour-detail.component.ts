@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnDestroy, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, Inject, inject, OnDestroy, OnInit, PLATFORM_ID, signal, WritableSignal } from '@angular/core';
 import { IDetailedTour } from '../../core/interfaces/itour';
 import { Subscription, switchMap, takeUntil } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -6,13 +6,14 @@ import { TourService } from '../../core/services/tour.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { EmailService } from '../../core/services/email.service';
 import { FormBuilder, FormGroup, Validators,ReactiveFormsModule } from '@angular/forms';
-import { CommonModule, NgClass } from "@angular/common";
+import { CommonModule, isPlatformBrowser, NgClass } from "@angular/common";
 import { ToastrService } from 'ngx-toastr';
 import { SafeUrlPipe } from '../../core/pipes/safe-url.pipe';
 import { DomSanitizer, Meta, Title } from '@angular/platform-browser';
 import { ReloadableComponent } from '../reloadable/reloadable.component';
 import { TranslatedPipe } from '../../core/pipes/translate.pipe';
 import { register } from 'swiper/element/bundle';
+import { ReloadService } from '../../core/services/reload.service';
 
 register();
 
@@ -237,24 +238,37 @@ export class TOurDetailComponent  extends ReloadableComponent  {
       };
     });
   }
+ constructor(
+    ReloadService:ReloadService,
+    @Inject(PLATFORM_ID) private platformId: object
+  ) {
+      super(ReloadService);
+    }
+    ngAfterViewInit(): void {
 
-  ngAfterViewInit(): void {
-    // 1. الكود الخاص بتشغيل السلايدر (Swiper) كما هو
-    setTimeout(() => {
-      const swiperEl = document.querySelector('.tourSwiper') as any;
-  
-      if (swiperEl?.swiper) {
-        swiperEl.swiper.update();
-        swiperEl.swiper.slideToLoop(0, 0);
-        swiperEl.swiper.autoplay.start();
-      } else if (swiperEl) {
-        swiperEl.initialize();
+
+      if (isPlatformBrowser(this.platformId)) {
+    
+        // 🔹 Swiper init
+        setTimeout(() => {
+          const swiperEl = document.querySelector('.tourSwiper') as any;
+    
+          if (swiperEl?.swiper) {
+            swiperEl.swiper.update();
+            swiperEl.swiper.slideToLoop(0, 0);
+            swiperEl.swiper.autoplay.start();
+          } else if (swiperEl) {
+            swiperEl.initialize();
+          }
+        }, 300);
+    
+        // 🔹 DOM access
+        const header = document.querySelector('.lux-header') as HTMLElement;
+    
+        // 🔹 animation logic
+        this.waitForDataAndAnimatePrice();
       }
-    }, 300);
-  
-    // 2. ننتظر حتى تتحميل البيانات ثم نبدأ حركة السعر (مرة واحدة فقط)
-    this.waitForDataAndAnimatePrice();
-  }
+    }
   
   // متغير للتأكد من أن الحركة اشتغلت مرة واحدة فقط
   private hasAnimated = false;
