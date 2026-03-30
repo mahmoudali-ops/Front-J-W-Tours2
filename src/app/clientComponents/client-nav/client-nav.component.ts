@@ -127,13 +127,17 @@ export class ClientNavComponent implements OnInit {
   // Dropdown
   // =========================
   toggleDropdown(event: Event, dropdownName: string): void {
-    event.preventDefault();
+    // منع انتشار الحدث فقط، لا تستخدم preventDefault
     event.stopPropagation();
-
-    this.activeDropdown =
-      this.activeDropdown === dropdownName ? null : dropdownName;
+    
+    // تغيير الحالة
+    if (this.activeDropdown === dropdownName) {
+      this.activeDropdown = null;
+    } else {
+      // أغلق أي قائمة مفتوحة أولاً
+      this.activeDropdown = dropdownName;
+    }
   }
-
   // =========================
   // Keyboard Events
   // =========================

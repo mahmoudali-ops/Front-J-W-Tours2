@@ -697,34 +697,8 @@
   transform: rotate(180deg);
 }
 
-.oc-sub {
-  margin: 0 2px 6px;
-  padding: 0 6px;
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transform: translate3d(0, -6px, 0);
-  transition: max-height 340ms var(--oc-ease), opacity 220ms var(--oc-ease), transform 340ms var(--oc-ease);
-}
 
-.oc-sub.is-open {
-  max-height: 640px;
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
 
-.oc-sub-item {
-  display: block;
-  padding: 10px 12px;
-  margin: 6px 4px 0;
-  border-radius: 12px;
-  text-decoration: none;
-  color: var(--oc-ink);
-  border: 1px solid rgba(2, 6, 23, 0.06);
-  background: rgba(2, 6, 23, 0.02);
-  transition: transform 160ms ease, background-color 160ms ease, border-color 160ms ease;
-  transform: translate3d(0, 0, 0);
-}
 
 .oc-sub-item:hover {
   transform: translate3d(2px, 0, 0);
@@ -931,3 +905,81 @@
 .oc-user-subtitle {
   color: var(--oc-ink);
 }
+/* ===========================
+   DROPDOWN FIX FOR MOBILE
+   =========================== */
+   .oc-sub {
+    margin: 0 2px 6px;
+    padding: 0 6px;
+    display: none;           /* استخدم display بدلاً من max-height */
+    opacity: 0;
+    transform: translate3d(0, -6px, 0);
+    transition: opacity 220ms var(--oc-ease), transform 340ms var(--oc-ease);
+    will-change: opacity, transform;
+  }
+  
+  .oc-sub.is-open {
+    display: block;          /* عرض القائمة */
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  
+  /* تنسيق عناصر القائمة */
+  .oc-sub-item {
+    display: block;
+    padding: 12px 16px;      /* زيادة المساحة للضغط على الموبايل */
+    margin: 4px 0;
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--oc-ink);
+    border: 1px solid rgba(2, 6, 23, 0.06);
+    background: rgba(2, 6, 23, 0.02);
+    transition: transform 160ms ease, background-color 160ms ease, border-color 160ms ease;
+    transform: translate3d(0, 0, 0);
+    /* مهم للموبايل */
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  
+  .oc-sub-item:active {      /* استخدم :active بدلاً من :hover للموبايل */
+    transform: translate3d(2px, 0, 0);
+    background: rgba(255, 122, 69, 0.12);
+    border-color: rgba(255, 122, 69, 0.28);
+  }
+  
+  /* تأكد أن الـ panel لا يمنع التفاعلات */
+  .oc-panel {
+    overflow-y: auto;        /* تأكد أنها auto وليست hidden */
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* تأكد أن الزر قابل للنقر على الموبايل */
+  .oc-item-btn {
+    cursor: pointer;
+    touch-action: manipulation;  /* تحسين استجابة اللمس */
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* تحسين حجم منطقة الضغط على الموبايل */
+  @media (max-width: 768px) {
+    .oc-item,
+    .oc-item.oc-item-btn {
+      padding: 16px 14px;    /* منطقة ضغط أكبر */
+      margin: 2px 0;
+    }
+    
+    .oc-sub-item {
+      padding: 14px 16px;    /* منطقة ضغط أكبر للقائمة المنسدلة */
+      margin: 6px 0;
+    }
+    
+    .oc-chevron {
+      font-size: 14px;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
