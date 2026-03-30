@@ -95,51 +95,49 @@
     </div>
 
     <!-- Swiper -->
-    <swiper-container
-      #swiper
-      class="cards-swiper"
-      effect="cards"
-      grab-cursor="true"
-      loop="true"
-      speed="1200" 
-      autoplay-delay="3000"
-      autoplay-disable-on-interaction="false"
-      touch-ratio="1.2"
-
-      cards-effect-rotate="0"
-      cards-effect-per-slide-offset="18" 
-      cards-effect-slide-shadows="false"
-
-      breakpoints='{
-        "0": { "width": 280, "height": 380 },
-        "576": { "width": 380, "height": 430 },
-        "768": { "width": 460, "height": 500 },
-        "992": { "width": 520, "height": 520 }
-      }'
-    >
-
-      @for (category of AllPopularHurghadaCat(); track category.id ) {
-        @if(isBrowser){
-          <swiper-slide>
-            <a [routerLink]="['/categrytourDetail', category.slug]" class="card-slide">
-              <img
-                [src]="category.imageCover"
-                [alt]="category.titles"
-                loading="lazy"
-              />
-              <div class="content">
-                <h3>{{category.titles}}</h3>
-                <div class="location">
-                  <i class="fas fa-map-marker-alt"></i>
-                  <span>Hurghada</span>
-                </div>
-              </div>
-            </a>
-          </swiper-slide>
-        }
-      }
-
-    </swiper-container>
+  <!-- استخدم #swiperContainer للرجوع إليه في الـ TS، وأضف cardsDirective -->
+  <swiper-container
+  #swiperContainer
+  cardsDirective
+  class="cards-swiper"
+  effect="cards"
+  grab-cursor="true"
+  loop="true"
+  speed="1200"
+  autoplay-delay="3000"
+  autoplay-disable-on-interaction="false"
+  autoplay-pause-on-mouse-enter="false"
+  touch-ratio="1.2"
+  cards-effect-rotate="0"
+  cards-effect-per-slide-offset="18"
+  cards-effect-slide-shadows="false"
+  breakpoints='{
+    "0": { "width": 280, "height": 380 },
+    "576": { "width": 380, "height": 430 },
+    "768": { "width": 460, "height": 500 },
+    "992": { "width": 520, "height": 520 }
+  }'
+>
+<!-- قم بإزالة @if(isBrowser) تماماً -->
+@for (category of AllPopularHurghadaCat(); track category.id) {
+  <swiper-slide>
+    <a [routerLink]="['/categrytourDetail', category.slug]" class="card-slide">
+      <img
+        [src]="category.imageCover"
+        [alt]="category.titles"
+        loading="lazy"
+      />
+      <div class="content">
+        <h3>{{category.titles}}</h3>
+        <div class="location">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Hurghada</span>
+        </div>
+      </div>
+    </a>
+  </swiper-slide>
+}
+</swiper-container>
   </div>
 </section>
 
