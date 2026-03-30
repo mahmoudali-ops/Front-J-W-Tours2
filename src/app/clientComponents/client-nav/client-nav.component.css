@@ -1022,3 +1022,16 @@
     font-size: 14px;
     color: #666;
   }
+  @media (max-width: 768px) {
+    .language-switcher .lang-btn img {
+      width: 28px;
+      height: 28px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .language-switcher .lang-btn img {
+      width: 26px;
+      height: 26px;
+    }
+  }
