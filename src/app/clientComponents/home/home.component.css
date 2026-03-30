@@ -3285,4 +3285,24 @@ aside.oc-panel {
         display: flex !important;
         flex-direction: column;
     }
+}.btn-gold {
+  display: inline-block;
+  margin-top: 20px; /* ينزله تحت شوية */
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff; /* نص أبيض */
+  background: linear-gradient(45deg, #d4af37, #ffd700); /* لون زهبي */
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+.btn-gold:hover {
+  transform: translateY(-3px); /* يرفع الزرار عند hover */
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  background: linear-gradient(45deg, #ffd700, #ffec8b); /* يتوهج لزهري/ذهبي فاتح */
+  cursor: pointer;
 }
