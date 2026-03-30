@@ -1021,25 +1021,19 @@
   .oc-user-subtitle {
     font-size: 14px;
     color: #666;
-  }/* الوضع الطبيعي (ديسكتوب) */
-.language-switcher {
-  display: flex;
-  gap: 8px;
-}
-
-/* الموبايل */
+  }/* الموبايل */
 @media (max-width: 768px) {
   .language-switcher {
-    gap: 4px;
+    gap: 6px;
   }
 
   .language-switcher .lang-btn {
-    padding: 2px;
+    padding: 3px;
   }
 
   .language-switcher .lang-btn img {
-    width: 22px;
-    height: 22px;
+    width: 26px;  /* كبرناها سنة */
+    height: 26px;
     object-fit: cover;
     border-radius: 50%;
   }
