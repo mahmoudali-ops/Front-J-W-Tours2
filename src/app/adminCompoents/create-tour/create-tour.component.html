@@ -245,10 +245,8 @@
           }"
         />
         <div class="invalid-feedback mb-2" *ngIf="getTranslationGroup(lang).get('durationType')?.invalid && getTranslationGroup(lang).get('durationType')?.touched">
-          Duration Type
+          Duration Type is required
         </div>
-
-          
 
           <textarea 
             class="form-control mt-2" 
@@ -263,9 +261,6 @@
             formControlName="metaKeywords" 
             placeholder="Meta Key Words"
           ></textarea>
-          
-
-          
         </div>
 
         <!-- Includes -->
@@ -358,35 +353,35 @@
           </button>
         </div>
 
-          <!-- Highlights -->
-          <div formGroupName="highlights" class="mb-3">
-            <h6>WhyUs</h6>
-            <div [formArrayName]="lang">
-              <div *ngFor="let h of getwhyus(lang).controls; let j = index" 
-                   [formGroupName]="j" 
-                   class="d-flex gap-2 mb-2 align-items-center">
-                <input 
-                  class="form-control" 
-                  formControlName="text" 
-                  placeholder="Why us" 
-                  [ngClass]="{
-                    'is-invalid': h.get('text')?.invalid && h.get('text')?.touched
-                  }" />
-                <button 
-                  type="button" 
-                  class="btn btn-danger btn-sm" 
-                  (click)="removewhyus(lang, j)">
-                  X
-                </button>
-              </div>
+        <!-- Why Us - Modified to match update-tour -->
+        <div formGroupName="whyus" class="mb-3">
+          <h6>Why Us</h6>
+          <div [formArrayName]="lang">
+            <div *ngFor="let w of getwhyus(lang).controls; let j = index" 
+                 [formGroupName]="j" 
+                 class="d-flex gap-2 mb-2 align-items-center">
+              <input 
+                class="form-control" 
+                formControlName="text" 
+                placeholder="Why us" 
+                [ngClass]="{
+                  'is-invalid': w.get('text')?.invalid && w.get('text')?.touched
+                }" />
+              <button 
+                type="button" 
+                class="btn btn-danger btn-sm" 
+                (click)="removewhyus(lang, j)">
+                X
+              </button>
             </div>
-            <button 
-              type="button" 
-              class="btn btn-secondary btn-sm" 
-              (click)="addwhyus(lang)">
-              + Add Why this
-            </button>
           </div>
+          <button 
+            type="button" 
+            class="btn btn-secondary btn-sm" 
+            (click)="addwhyus(lang)">
+            + Add Why us
+          </button>
+        </div>
 
       </div>
     </div>
